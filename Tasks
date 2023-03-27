@@ -1,0 +1,17 @@
+creating a rest api for the following end points (E-com website)
+1. REGISTER A NEW USER (username , email, password, confirm password)
+    in register controller checklist sre
+    1.1 validate the request
+    1.2 authorise the request
+    1.3 check user is in the database already
+    1.4 prepare schema and models
+    1.5 store new user in database 
+    1.6 generate jwt token
+    1.7 send response
+2. LOGIN USER
+3. LOGED IN AUTORIZATION
+4. ADD NEW PRODUCT
+5. UPDATE A PRODUCT
+6. GET ALL PRODUCT LIST
+7. GET SINGLE PRODUCT
+8. DELETE PRODUCT
