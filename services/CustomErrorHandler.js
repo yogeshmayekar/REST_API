@@ -16,6 +16,14 @@ class CustomErrorHandler extends Error {    //extended the javaScript inbild err
     static incorerctPassword(message="Incorrect Password"){
         return new CustomErrorHandler(401, message);
     }
+    
+    static unAuthorized(message="Access denies"){
+        return new CustomErrorHandler(401, message);
+    }
+    
+    static notFound(message="404 Not Found"){
+        return new CustomErrorHandler(404, message);
+    }
 }
 
 export default CustomErrorHandler;

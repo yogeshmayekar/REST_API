@@ -2,7 +2,7 @@ import Joi from 'joi'
 import CustomErrorHandler from '../services/CustomErrorHandler';
 import { User } from '../models';
 import bcrypt from 'bcrypt';
-import Jwtservice from '../services/JwtService';
+import JwtService from '../services/JwtService';
 
 // created a object to write a logic of the routes
 const registerController = {
@@ -49,7 +49,7 @@ const registerController = {
             const result = await user.save();// new user saved in the database
 
             // token
-            accessToken = Jwtservice.sign({_id: result._id, role: result.role});
+            accessToken = JwtService.sign({_id: result._id, role: result.role});
         }catch(err){
             return next(err)
         }
