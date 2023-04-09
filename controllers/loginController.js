@@ -1,8 +1,9 @@
 import Joi from 'joi';
 import CustomErrorHandler from '../services/CustomErrorHandler';
-import Jwtservice from '../services/JwtService';
+import JwtService from '../services/JwtService';
 import bcrypt from 'bcrypt';
-import { User } from '../models';
+import { User, RefreshToken} from '../models';
+import { REFRESH_SECRET } from '../config';
 
 const loginController={
     async login(req, res, next){
@@ -32,11 +33,36 @@ const loginController={
             }
 
             //token 
-            const accessToken = Jwtservice.sign({_id:user._id, role: user.role});
-            res.json({access_token:accessToken})
+            const accessToken = JwtService.sign({_id:user._id, role: user.role});
+            const refreshToken = JwtService.sign({_id: user._id, role: user.role}, '1y',REFRESH_SECRET);
+             // whitelist inside the database
+             await RefreshToken.create({token:refreshToken})
+
+            res.json({access_token:accessToken, refresh_token:refreshToken})
         }catch(err){
             return next(err);
         }
+    },
+
+    //another method for logout
+    async logout(req, res, next){
+        //validation
+        const refreshSchema = Joi.object({
+            refresh_token:Joi.string().required(),
+        });
+
+        const { error } = refreshSchema.validate(req.body)
+
+        if (error) {
+            return next(error);
+        }
+
+        try{
+            await RefreshToken.deleteOne({token:req.body.refresh_token})
+        }catch(err){
+            return next(new Error('Something went wrong in database'))
+        }
+        res.json({status:"Log out"})
     }
 }
 

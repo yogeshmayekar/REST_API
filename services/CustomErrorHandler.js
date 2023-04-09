@@ -24,6 +24,10 @@ class CustomErrorHandler extends Error {    //extended the javaScript inbild err
     static notFound(message="404 Not Found"){
         return new CustomErrorHandler(404, message);
     }
+    
+    static serverError(message="image uploading failed"){
+        return new CustomErrorHandler(500, message);
+    }
 }
 
 export default CustomErrorHandler;
