@@ -15,7 +15,8 @@ router.post('/logout', loginController.logout)
 
 router.post('/products', [authentication, admin], productController.store)
 router.put('/products/:id', [authentication, admin], productController.update)
-router.delete('/products/:id', [authentication, admin], productController.destroy )
+router.delete('/products/:id', [authentication, admin], productController.destroy)
+router.get('/products', productController.index)
 
 
 

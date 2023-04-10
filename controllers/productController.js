@@ -1,5 +1,4 @@
 import { Product } from "../models"
-import Joi from "joi";
 import fs from "fs";
 const path = require('path');
 import multer from 'multer';
@@ -61,14 +60,14 @@ const productControlle ={
     },
 
     // update method 
-update(req, res ,next){
-    handleMultipart(req, res, async(err)=>{
-        if(err){
-            return next(CustomErrorHandler.serverError(err.message))
-        }
+    update(req, res ,next){
+        handleMultipart(req, res, async(err)=>{
+            if(err){
+                return next(CustomErrorHandler.serverError(err.message))
+            }
 
-        let filePath;
-        if(req.file){
+            let filePath;
+            if(req.file){
             filePath = req.file.path;  
         }
        
@@ -104,9 +103,10 @@ update(req, res ,next){
         }
 
         res.status(201).json(document);
-    });
-},
+        });
+    },
 
+    // delete product method 
     async destroy(req, res, next){
         const document= await Product.findOneAndRemove({_id:req.params.id});
         if(!document) {
@@ -121,6 +121,17 @@ update(req, res ,next){
             }
         })
         res.json(document);
+    },
+
+    // method of list of all product
+    async index(req, res, next){
+        let documents;
+        try{
+            documents = await Product.find().select('-updatedAt -__v').sort({_id:-1})
+        }catch(err){
+            return next(CustomErrorHandler.serverError())
+        }
+        return res.json(documents)
     }
 
 
