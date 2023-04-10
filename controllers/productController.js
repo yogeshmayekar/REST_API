@@ -105,7 +105,23 @@ update(req, res ,next){
 
         res.status(201).json(document);
     });
-}
+},
+
+    async destroy(req, res, next){
+        const document= await Product.findOneAndRemove({_id:req.params.id});
+        if(!document) {
+            return next(new Error('nothing to delete'))
+        }
+
+        //image delete
+        const imagePath = document.image;
+        fs.unlimk(`${appRoot}/${imagePath}`, (err)=>{
+            if(err){
+                return next(CustomErrorHandler.serverError())
+            }
+        })
+        res.json(document);
+    }
 
 
 }
