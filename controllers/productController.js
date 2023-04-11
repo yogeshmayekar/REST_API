@@ -114,8 +114,8 @@ const productControlle ={
         }
 
         //image delete
-        const imagePath = document.image;
-        fs.unlimk(`${appRoot}/${imagePath}`, (err)=>{
+        const imagePath = document._doc.image;
+        fs.unlink(`${appRoot}/${imagePath}`, (err)=>{
             if(err){
                 return next(CustomErrorHandler.serverError())
             }
@@ -131,9 +131,20 @@ const productControlle ={
         }catch(err){
             return next(CustomErrorHandler.serverError())
         }
-        return res.json(documents)
-    }
+        return res.json(documents);
+    },
 
+    // method to get sigle product 
+    async show(req, res, next){
+       let document;
+       try{
+            document = await Product.findOne({_id:req.params.id}).select('-updatedAt -__v')
+       }catch(err){
+            return next(CustomErrorHandler.serverError())
+       } 
+
+       return res.json(document);
+    }
 
 }
 

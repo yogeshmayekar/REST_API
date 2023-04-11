@@ -11,8 +11,7 @@ const productSchema = new Schema({
         // need to add comple url including domain 
         return `${ APP_URL }/${image}`;
     })}, // to save the path of thw image
-    role: {type: String, default:'customer'},
-},{timestamps:true});
+},{timestamps:true, id:false});
 
 mongoose.set('toJSON', { getters: true });
 
