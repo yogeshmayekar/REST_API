@@ -3,7 +3,7 @@ import CustomErrorHandler from '../services/CustomErrorHandler';
 import { RefreshToken, User } from '../models';
 import bcrypt from 'bcrypt';
 import JwtService from '../services/JwtService';
-import { REFRESH_SECRET } from '../config'
+import { REFRESH_SECRET } from '../src/config'
 
 // created a object to write a logic of the routes
 const registerController = {

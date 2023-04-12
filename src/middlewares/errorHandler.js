@@ -1,4 +1,4 @@
-import { DEBUG_MODE } from '../config'
+import { DEBUG_MODE } from '../src/config'
 import { ValidationError }  from 'joi'
 import CustomErrorHandler from '../services/CustomErrorHandler';
 

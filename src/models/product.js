@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { APP_URL } from '../config';
+import { APP_URL } from '../src/config';
 const Schema = mongoose.Schema;
 
 // schema created for register user in database
