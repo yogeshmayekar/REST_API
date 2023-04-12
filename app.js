@@ -1,7 +1,7 @@
 import express from "express";
-import { APP_PORT, DB_URL } from "./config";
-import errorHandler from "./middlewares/errorHandler";
-import routes from './routes';
+import { APP_PORT, DB_URL } from "./src/config";
+import errorHandler from "./src/middlewares/errorHandler";
+import routes from './src/routes';
 import mongoose from 'mongoose';
 import path from 'path'
 mongoose.set('strictQuery', false);

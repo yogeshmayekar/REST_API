@@ -3,7 +3,7 @@ import CustomErrorHandler from '../services/CustomErrorHandler';
 import JwtService from '../services/JwtService';
 import bcrypt from 'bcrypt';
 import { User, RefreshToken} from '../models';
-import { REFRESH_SECRET } from '../src/config';
+import { REFRESH_SECRET } from '../config';
 
 const loginController={
     async login(req, res, next){

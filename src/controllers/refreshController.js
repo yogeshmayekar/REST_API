@@ -2,7 +2,7 @@ import Joi from "joi";
 import { RefreshToken, User} from "../models";
 import CustomErrorHandler from "../services/CustomErrorHandler";
 import JwtService from "../services/JwtService";
-import { REFRESH_SECRET } from "../src/config";
+import { REFRESH_SECRET } from "../config";
 
 const refreshController = {
     async refresh(req, res, next){
