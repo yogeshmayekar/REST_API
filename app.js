@@ -13,8 +13,8 @@ mongoose.connect(DB_URL)
 
 global.appRoot = path.resolve(__dirname)
 const app=express(); //created express instance
+app.use(express.urlencoded({extended : false}))
 
-app.use(express.urlencoded({extendes:false}));
 app.use(express.json()) 
 app.use('/api', routes);
 app.use('/uploads', express.static('uploads'))
